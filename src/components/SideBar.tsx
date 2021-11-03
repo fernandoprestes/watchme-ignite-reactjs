@@ -3,7 +3,7 @@ import { api } from '../services/api'
 import { Button } from './Button'
 
 interface SidebarProps {
-  handleClickButton: (id: number) => void
+  setSelectedGenreId: (id: number) => void
   selectedGenreId: number
 }
 
@@ -13,7 +13,7 @@ interface GenreProps {
   title: string
 }
 
-export function SideBar({ handleClickButton, selectedGenreId }: SidebarProps) {
+export function SideBar({selectedGenreId, setSelectedGenreId} : SidebarProps) {
   const [genres, setGenres] = useState<GenreProps[]>([])
   
   useEffect(() => {
@@ -21,6 +21,10 @@ export function SideBar({ handleClickButton, selectedGenreId }: SidebarProps) {
       setGenres(response.data)
     })
   }, [])
+
+  function handleClickButton(id: number) {
+    setSelectedGenreId(id);
+  }
 
   return (
     <nav className="sidebar">
